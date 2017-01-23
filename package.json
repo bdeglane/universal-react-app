@@ -9,6 +9,8 @@
   "author": "bdeglane@users.noreply.github.com",
   "license": "MIT",
   "dependencies": {
+    "ejs": "^2.5.5",
+    "express": "^4.14.0",
     "gulp": "^3.9.1",
     "react": "^15.4.2",
     "react-redux": "^5.0.2",
