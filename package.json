@@ -1,0 +1,18 @@
+{
+  "name": "react-redux-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "bdeglane@users.noreply.github.com",
+  "license": "MIT",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "react": "^15.4.2",
+    "react-redux": "^5.0.2",
+    "redux": "^3.6.0",
+    "webpack": "^1.14.0"
+  }
+}
