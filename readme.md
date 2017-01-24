@@ -1,2 +1,3 @@
-# React Redux Server Side
+# Universal React App
 
+Sample React universal app 
