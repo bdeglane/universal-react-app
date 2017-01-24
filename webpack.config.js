@@ -25,7 +25,8 @@ module.exports = {
     loaders: [
       {
         test: /\.(css|scss|sass)$/,
-        loader: ExtractTextPlugin.extract('css!sass')
+        // loaders: ["style-loader", "css-loader", "sass-loader"]
+        loader: ExtractTextPlugin.extract("css-loader!sass-loader")
       },
       {
         test: /\.jsx?$/,
@@ -47,7 +48,7 @@ module.exports = {
   plugins: [
     // Avoid publishing files when compilation fails
     //new webpack.NoErrorsPlugin(),
-    new ExtractTextPlugin('./style/style.css', {
+    new ExtractTextPlugin('../style/style.css', {
       allChunks: true
     }),
     new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js')
