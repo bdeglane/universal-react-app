@@ -73,7 +73,7 @@ gulp.task('webpack:build-dev', function (callback) {
 
 // simple webserver
 gulp.task('server', function () {
-  gulp.src('./')
+  gulp.src('./src/static/')
     .pipe(webserver({
       livereload: true,
       directoryListing: false,
