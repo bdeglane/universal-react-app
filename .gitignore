@@ -98,5 +98,6 @@ Temporary Items
 # Jetbrains
 .idea
 
-/src/static/
-!/src/static/index.html
+#/src/static/
+/src/static/js
+/src/static/style
