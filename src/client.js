@@ -1,10 +1,10 @@
 import React from 'react';
 import {Router, browserHistory} from 'react-router';
-import routes from './client/route/route';
+import Routes from './client/route/Routes.jsx';
 
 window.onload = () => {
   ReactDOM.render(
-    <routes/>,
+    <Routes/>,
     document.getElementById('main')
   );
 };
