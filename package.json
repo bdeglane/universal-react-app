@@ -1,11 +1,12 @@
 {
   "name": "react-redux-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Sample universal app",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "run": "node_modules/.bin/babel-node src/server.js"
+    "run": "node_modules/.bin/babel-node src/server.js",
+    "run:dev": "exit 1"
   },
   "author": "bdeglane@users.noreply.github.com",
   "license": "MIT",
@@ -35,5 +36,6 @@
     "sass-loader": "^4.1.1",
     "style-loader": "^0.13.1",
     "webpack": "^1.14.0"
-  }
+  },
+  "devDependencies": {}
 }
