@@ -17,7 +17,7 @@
       }
     },
     "run:universal:dev": {
-      "command": "node_modules\\.bin\\babel-node src/server.js",
+      "command": "node_modules\\.bin\\nodemon src/server.js --exec node_modules\\.bin\\babel-node",
       "env": {
         "BABEL_ENV": "node",
         "NODE_ENV": "development"
@@ -55,5 +55,7 @@
     "style-loader": "^0.13.1",
     "webpack": "^1.14.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
 }
