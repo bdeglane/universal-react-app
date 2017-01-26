@@ -8,7 +8,8 @@
     "run:universal": "better-npm-run run:universal",
     "run:universal:dev": "better-npm-run run:universal:dev",
     "postinstall": "better-npm-run postinstall",
-    "start": "npm run run:universal"
+    "start": "npm run run:universal",
+    "dev": "node_modules\\.bin\\concurrent -k \"npm run run:universal:dev\" \"gulp build:dev\" "
   },
   "betterScripts": {
     "run:universal": {
@@ -66,6 +67,7 @@
     "webpack": "^1.14.0"
   },
   "devDependencies": {
+    "concurrently": "^3.1.0",
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0"
   }
