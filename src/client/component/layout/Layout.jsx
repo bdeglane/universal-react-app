@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
+import Header from '../header/Header.jsx';
+
 import './layout.scss';
 
 export default class Layout extends Component {
   render() {
     return (
-      <div className="app-root">
-        <div className="app-content">
-          {this.props.children}
+      <div className="app-root grid-frame">
+        <div className="grid-block vertical">
+          <Header/>
+          <div className="app-content grid-block">
+            {this.props.children}
+          </div>
         </div>
       </div>
     );
