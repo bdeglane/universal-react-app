@@ -6,6 +6,8 @@ import {syncHistoryWithStore} from 'react-router-redux'
 import Store from './core/Store';
 import Routes from './route/Routes.jsx';
 
+import './style/main.scss';
+
 export default class App extends Component {
   constructor() {
     super();
