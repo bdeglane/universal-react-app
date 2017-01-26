@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {createStore, applyMiddleware, compose} from 'redux'
 import {Provider} from 'react-redux'
 import {browserHistory} from 'react-router'
 import {syncHistoryWithStore} from 'react-router-redux'
