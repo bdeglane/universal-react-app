@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "run:universal": "better-npm-run run:universal",
-    "run:universal:dev": "better-npm-run run:universal:dev"
+    "run:universal:dev": "better-npm-run run:universal:dev",
+    "postinstall": "better-npm-run postinstall",
+    "start": "npm run run:universal"
   },
   "betterScripts": {
     "run:universal": {
@@ -21,6 +23,12 @@
       "env": {
         "BABEL_ENV": "node",
         "NODE_ENV": "development"
+      }
+    },
+    "postinstall": {
+      "command": "gulp build",
+      "env": {
+        "NODE_ENV": "production"
       }
     }
   },
@@ -56,6 +64,7 @@
     "webpack": "^1.14.0"
   },
   "devDependencies": {
+    "mocha": "^3.2.0",
     "nodemon": "^1.11.0"
   }
 }
