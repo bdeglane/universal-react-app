@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Routes from './client/route/Routes.jsx';
+import App from './client/App.jsx';
 
 window.onload = () => {
   ReactDOM.render(
-    <Routes/>,
+    <App/>,
     document.getElementById('main')
   );
 };
