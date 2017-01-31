@@ -1,5 +1,5 @@
-nav {
-  &.sidebar {
-    width: 400px;
-  }
+.sidebar {
+  width: 400px;
+  background: darkblue;
+  box-shadow: 2px 0 10px 1px rgba(0, 0, 0, 0.2);
 }

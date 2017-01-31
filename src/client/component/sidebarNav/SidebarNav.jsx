@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
+import classnames from 'classnames';
 
 import './sidebarNav.scss';
 
@@ -8,12 +9,22 @@ export default class SidebarNav extends Component {
   }
 
   render() {
+
+    let classes = classnames('grid-block', 'sidebar', 'nav shrink',
+      {
+        open: this.props.menu
+      });
+
     return (
-      <div className="grid-block">
-        <nav className="grid-block sidebar nav shrink">
+      <div className={classes}>
+        <nav className="grid-block ">
 
         </nav>
       </div>
     )
   }
 }
+
+SidebarNav.propTypes = {
+  menu: PropTypes.bool.isRequired
+};
