@@ -1,3 +1,5 @@
+@import "../../style/variable";
+
 header {
   &.header {
     background: white;
@@ -7,8 +9,10 @@ header {
     .menu {
       padding: 0 1rem;
       cursor: pointer;
+      transition: $simple-transition;
       &:hover {
         background: darkblue;
+        transition: $simple-transition
       }
       span {
         line-height: 3rem;
