@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import Header from '../header/Header.jsx';
+import Header from '../header/index';
+import SidebarNav from  '../sidebarNav/index';
 
 import './layout.scss';
 
@@ -9,8 +10,11 @@ export default class Layout extends Component {
       <div className="app-root grid-frame">
         <div className="grid-block vertical">
           <Header/>
-          <div className="app-content grid-block">
-            {this.props.children}
+          <div className="grid-block">
+            <SidebarNav/>
+            <div className="app-content grid-block">
+              {this.props.children}
+            </div>
           </div>
         </div>
       </div>
