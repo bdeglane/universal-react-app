@@ -10,7 +10,7 @@ export default class SidebarNav extends Component {
 
   render() {
 
-    let classes = classnames('grid-block', 'sidebar', 'nav shrink',
+    let classes = classnames('sidebar', 'nav shrink',
       {
         open: this.props.menu
       });

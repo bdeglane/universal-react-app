@@ -2,4 +2,16 @@
   width: 400px;
   background: darkblue;
   box-shadow: 2px 0 10px 1px rgba(0, 0, 0, 0.2);
+
+  position: absolute;
+  left: -400px;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+  transition: all ease-in 0.2s;
+
+  &.open {
+    left: 0;
+    transition: all ease-out 0.2s;
+  }
 }
