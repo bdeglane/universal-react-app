@@ -1,10 +1,12 @@
+$menu-width: 350px;
+
 .sidebar {
-  width: 400px;
+  width: $menu-width;
   background: darkblue;
   box-shadow: 2px 0 10px 1px rgba(0, 0, 0, 0.2);
 
   position: absolute;
-  left: -400px;
+  left: -$menu-width;
   top: 0;
   bottom: 0;
   z-index: 100;
