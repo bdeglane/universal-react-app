@@ -77,7 +77,7 @@ export default class Store {
         applyMiddleware(
           thunk,
           logger,
-          // crashReporter
+          crashReporter
         )
       )
     );

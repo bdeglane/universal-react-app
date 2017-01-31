@@ -11,7 +11,7 @@ import './style/main.scss';
 export default class App extends Component {
   constructor() {
     super();
-    // Add the reducer to your store on the `routing` key
+    // get the store
     this.store = new Store();
     // Create an enhanced history that syncs navigation events with the store
     this.history = syncHistoryWithStore(browserHistory, this.store.getStore());
