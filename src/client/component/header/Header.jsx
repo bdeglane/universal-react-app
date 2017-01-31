@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
+import FontAwesome from 'react-fontawesome';
 
 import './header.scss';
 
@@ -7,9 +8,17 @@ export default class Header extends Component {
     super();
   }
 
+  toggleMenu() {
+    this.props.toggleMenu();
+  }
+
   render() {
     return (
       <header className="grid-block shrink header">
+        <div className="grid-block shrink menu"
+             onClick={() => this.toggleMenu()}>
+          <FontAwesome name="bars"/>
+        </div>
         <div className="grid-block shrink">
           <div className="logo">
             Brand Logo
@@ -20,3 +29,7 @@ export default class Header extends Component {
     )
   }
 }
+
+Header.propTypes = {
+  toggleMenu: PropTypes.func.isRequired
+};
