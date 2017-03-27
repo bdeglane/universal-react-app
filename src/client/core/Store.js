@@ -33,12 +33,7 @@ export default class Store {
   }
 
   getCompose(middlewares) {
-    let composeEnhancers;
-    if (typeof window !== 'undefined') {
-      composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-    } else {
-      composeEnhancers = compose;
-    }
+    let composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     return composeEnhancers(middlewares);
   }
 }
