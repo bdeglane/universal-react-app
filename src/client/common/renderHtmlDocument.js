@@ -13,11 +13,11 @@ export const renderFullPage = (html, initialState) => {
     <link rel="stylesheet" href="style/main.css">
 	  </head>
 	  <body>
-	  <div class="main">
+	  <div id="main">
       ${html}
     </div>
 		<script>
-		  const state = ${JSON.stringify(initialState)};
+		  const state = JSON.parse(${JSON.stringify(initialState)});
 		  const saveState = (state) => {
         try {
           const serializedState = JSON.stringify(state);
