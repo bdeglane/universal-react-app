@@ -13,11 +13,20 @@ export const renderFullPage = (html, initialState) => {
     <link rel="stylesheet" href="style/main.css">
 	  </head>
 	  <body>
-	  <div class="app">
+	  <div class="main">
       ${html}
     </div>
 		<script>
-		  window.$REDUX_STATE = ${initialState}
+		  const state = ${JSON.stringify(initialState)};
+		  const saveState = (state) => {
+        try {
+          const serializedState = JSON.stringify(state);
+          localStorage.setItem('state', serializedState);
+        } catch (error) {
+          // ignore errors
+        }
+      };
+      saveState(state);
 	  </script>
 		<script src="js/vendor.js"></script>
     <script src="js/main.js"></script>
