@@ -1,69 +1,13 @@
 import {createStore, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk';
-
+import {logger} from './helper/logger';
+import {crashReporter} from './helper/crashReporter';
+import {
+  initialState,
+  saveState
+} from './helper/state';
 import reducers from '../reducer/index';
 
-const logger = (store) => {
-  return (next) => {
-    return (action) => {
-      console.group(action.type);
-      console.info('dispatching', action);
-      // store dispatch
-      let result = next(action);
-      console.log('next state', store.getState());
-      console.groupEnd(action.type);
-      return result
-    };
-  };
-};
-
-const crashReporter = store => next => action => {
-  try {
-    return next(action)
-  } catch (err) {
-    console.error('Caught an exception!', err);
-
-    // todo ajax call with axios to log id db error
-
-    //Raven.captureException(err, {
-    //    extra: {
-    //        action,
-    //        state: store.getState()
-    //    }
-    //});
-    throw err
-  }
-};
-
-const loadState = () => {
-  try {
-    const serializedState = localStorage.getItem('state');
-    if (serializedState === null) {
-      return 'undefined';
-    }
-    return JSON.parse(serializedState);
-  } catch (error) {
-    return 'undefined';
-  }
-};
-
-const saveState = (state) => {
-  try {
-    const serializedState = JSON.stringify(state);
-    localStorage.setItem('state', serializedState);
-  } catch (error) {
-    // ignore errors
-  }
-};
-
-const initialState = () => {
-  let state = loadState();
-  if (state === 'undefined') {
-    return {}
-  } else {
-    return state;
-  }
-};
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
