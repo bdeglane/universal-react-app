@@ -1,10 +1,15 @@
 import path from 'path';
 import {Server} from 'http';
 import Express from 'express';
+
 import React from 'react';
 import {renderToString} from 'react-dom/server';
-import {match, RouterContext} from 'react-router';
+
+import {match, RouterContext, Router} from 'react-router';
 import routes from './client/route/route';
+
+import {renderFullPage} from './client/common/renderHtmlDocument';
+
 import NotFoundPage from './client/page/notFound/NotFoundPage.jsx';
 
 // initialize the server and configure support for ejs templates
@@ -33,6 +38,11 @@ app.get('*', (req, res) => {
         return res.redirect(302, redirectLocation.pathname + redirectLocation.search);
       }
 
+      if (renderProps == null) {
+        // return next('err msg: route not found'); // yield control to next middleware to handle the request
+        return res.status(404).send('Not found');
+      }
+
       // generate the React markup for the current route
       let markup;
       if (renderProps) {
@@ -45,7 +55,8 @@ app.get('*', (req, res) => {
       }
 
       // render the index template with the embedded React markup
-      return res.render('index', {markup});
+      // return res.render('index', {markup});
+      return renderFullPage(markup, null);
     }
   );
 });
