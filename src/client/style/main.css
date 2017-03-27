@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
+
+
+:root {
+    --primary-color: #2E2B40;
+    --secondary-color: #B0D91B;
+    --tertiary-color: #B43B7E;
+    --quaternary-color: #BF4345;
+    --last-color: #23202B;
+    --heading-font: 'Playfair Display', serif;
+    --primary-font: 'Noto Sans', sans-serif;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: var(--primary-font);
+}
+
+html, body * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-font);
+}
+
+a {
+    text-decoration: none;
+     color: var(--secondary-color);
+     font-size : 1.5rem;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+a:hover {
+ color: var(--secondary-color);
+}
+
+.titleFont {
+    font-family: var(--heading-font);
+}
+
+.primaryColor {
+    color: var(--primary-color);
+}
+
+.secondaryColor {
+    color: var(--secondary-color);
+}
+
+.tertiaryColor {
+    color: var(--tertiary-color);
+}
+
+.quaternaryColor {
+    color: var(--quaternary-color);
+}
+
+.primaryBgColor {
+    background: var(--primary-color);
+}
+
+.secondaryBgColor {
+    background: var(--secondary-color);
+}
+
+.tertiaryBgColor {
+    background: var(--tertiary-color);
+}
+
+.big {
+    font-size: 2rem;
+}
+
+.title {
+    composes: titleFont primaryColor big;
+}
+
+:global(#app) {
+    /*background: linear-gradient(180deg, var(--primary-color) 5%, var(--last-color));*/
+    background: var(--last-color);
+}
+
+:global(.page) {
+    padding: 2rem;
+    width: 100%;
+}
+
+:global(.page p) {
+    font-size: 1.5rem; 
+    margin: 0 0 2rem 0;
+    color: white;
+    
+}
+
+:global(.page label) {
+    font-size: 1.5rem; 
+    margin: 0 0 2rem 0;
+    color: white;
+    
+}
+
+:global(.couleur) {
+    color: white;
+    
+}
+
+:global(.bordure) {
+    color: white;
+   
+    border-bottom:solid white;
+    margin : 0 0 3rem 0;
+    
+}

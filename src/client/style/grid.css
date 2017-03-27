@@ -1,0 +1,74 @@
+:global(.frame) {
+    display: flex;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    backface-visibility: hidden;
+    flex: 1 1 auto;
+    flex-flow: row wrap;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    order: 0;
+}
+
+:global(.block) {
+    display: flex;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+    backface-visibility: hidden;
+    flex: 1 1 auto;
+    flex-flow: row wrap;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    order: 0;
+    overflow-y: auto;
+}
+
+:global(.content) {
+    display: block;
+    padding: 0 1rem;
+    overflow-y: auto;
+    flex: 1 1 auto;
+}
+
+:global(.content .block) {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    flex-wrap: wrap;
+    overflow: visible;
+}
+
+:global(.shrink.block),
+:global(.shrink.content) {
+    flex: 0 0 auto;
+    overflow: visible;
+}
+
+:global(.vertical.frame),
+:global(.vertical.block) {
+    flex-flow: column nowrap;
+    align-items: stretch;
+}
+
+:global(.alignRight.frame),
+:global(.alignRight.block) {
+    justify-content: flex-end;
+}
+
+:global(.alignCenter.frame),
+:global(.alignCenter.block) {
+    justify-content: center;
+}
+
+:global(.alignJustify.frame),
+:global(.alignJustify.block) {
+    justify-content: space-between;
+}
+
+:global(.alignSpaced.frame),
+:global(.alignSpaced.block) {
+    justify-content: space-around;
+}
