@@ -8,19 +8,13 @@ import {
 } from './helper/state';
 import reducers from '../reducer/index';
 
-if (typeof window !== 'undefined') {
-  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-} else {
-  const composeEnhancers = compose;
-}
-
 export default class Store {
   constructor() {
     // Add the reducer to your store on the `routing` key
     this.store = createStore(
       reducers,
       initialState(),
-      composeEnhancers(
+      this.getCompose(
         applyMiddleware(
           thunk,
           logger,
@@ -36,5 +30,15 @@ export default class Store {
 
   getStore() {
     return this.store;
+  }
+
+  getCompose(middlewares) {
+    let composeEnhancers;
+    if (typeof window !== 'undefined') {
+      composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+    } else {
+      composeEnhancers = compose;
+    }
+    return composeEnhancers(middlewares);
   }
 }
