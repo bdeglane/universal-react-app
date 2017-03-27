@@ -6,8 +6,9 @@ export default class Routes extends Component {
   render() {
     return (
       <Router history={this.props.history}
-              routes={routes}
-              onUpdate={() => window.scrollTo(0, 0)}/>
+              onUpdate={() => window.scrollTo(0, 0)}>
+        {routes}
+      </Router>
     );
   }
 }
