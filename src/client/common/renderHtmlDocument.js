@@ -13,9 +13,7 @@ export const renderFullPage = (html, initialState) => {
     <link rel="stylesheet" href="style/main.css">
 	  </head>
 	  <body>
-	  <div id="main">
-      ${html}
-    </div>
+	  <div id="main">${html}</div>
 		<script>
 		  const state = JSON.parse(${JSON.stringify(initialState)});
 		  const saveState = (state) => {
