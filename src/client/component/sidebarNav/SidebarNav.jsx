@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import classnames from 'classnames';
 
-import './sidebarNav.scss';
+import './sidebarNav.css';
 
 export default class SidebarNav extends Component {
   constructor() {

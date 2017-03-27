@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Header from '../header/index';
 import SidebarNav from  '../sidebarNav/index';
 
-import './layout.scss';
+import './layout.css';
 
 export default class Layout extends Component {
   render() {

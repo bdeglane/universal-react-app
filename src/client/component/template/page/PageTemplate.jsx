@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import './pageTemplate.scss';
+import './pageTemplate.css';
 
 export default class PageTemplate extends Component {
 

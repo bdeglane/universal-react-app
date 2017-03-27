@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import FontAwesome from 'react-fontawesome';
 
-import './header.scss';
+import './header.css';
 
 export default class Header extends Component {
   constructor() {
