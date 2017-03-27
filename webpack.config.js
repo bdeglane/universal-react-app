@@ -51,7 +51,20 @@ module.exports = {
     new ExtractTextPlugin('../style/style.css', {
       allChunks: true
     }),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js')
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
+    new webpack.BannerPlugin({
+      banner: [
+        "/**",
+        " * Universal React App v1.0.0",
+        " *",
+        " * Copyright 2017, https://github.com/bdeglane",
+        " * Tous droits réservés.",
+        " *",
+        " */"
+      ].join("\n"),
+      raw: true, // if true, banner will not be wrapped in a comment
+      entryOnly: true, // if true, the banner will only be added to the entry chunks
+    })
   ],
   stats: {
     colors: true
