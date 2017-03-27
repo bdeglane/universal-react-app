@@ -5,14 +5,17 @@ import Express from 'express';
 import React from 'react';
 import {renderToString} from 'react-dom/server';
 
+import {applyMiddleware, createStore} from 'redux';
 import {match, RouterContext, Router} from 'react-router';
 import {Provider} from 'react-redux';
 import routes from './client/route/route';
-import Store from './client/core/Store';
+import reducers from './client/reducer/index'
 
 import {renderFullPage} from './client/common/renderHtmlDocument';
 
 import NotFoundPage from './client/page/notFound/NotFoundPage.jsx';
+import {fetchComponentData} from "./client/common/fetchComponentData";
+import {promiseMiddleware} from "./client/middleware/promiseMiddleware";
 
 // initialize the server and configure support for ejs templates
 const app = new Express();
@@ -20,6 +23,7 @@ const server = new Server(app);
 
 // app.set('view engine', 'ejs');
 // app.set('views', path.join(__dirname, 'view'));
+const finalCreateStore = applyMiddleware(promiseMiddleware)(createStore);
 
 // define the folder that will be used for static assets
 app.use(Express.static(path.join(__dirname, 'static')));
@@ -30,6 +34,7 @@ app.get('*', (req, res, next) => {
     {routes, location: req.url},
     (err, redirectLocation, renderProps) => {
 
+      const store = finalCreateStore(reducers);
 
       // in case of error display the error message
       if (err) {
@@ -43,26 +48,36 @@ app.get('*', (req, res, next) => {
 
       if (renderProps == null) {
         // return next('err msg: route not found'); // yield control to next middleware to handle the request
-        return res.status(404).send('Not found');
+        let page = renderToString(<NotFoundPage/>);
+        return res.status(404).send(renderFullPage(page, {}));
       }
 
-      let store = new Store();
+      //let store = new Store();
       // generate the React markup for the current route
-      let markup;
-      if (renderProps) {
-        // if the current route matched we have renderProps
-        markup = renderToString(<Provider store={store.getStore()}><RouterContext {...renderProps}/></Provider>);
-      } else {
-        // otherwise we can render a 404 page
-        markup = renderToString(<NotFoundPage/>);
-        res.status(404);
-      }
 
-      // render the index template with the embedded React markup
-      // return res.render('index', {markup});
-      return res.status(200).send(renderFullPage(markup, {tata: 'toto'}));
-    }
-  );
+      // this is where universal rendering happens,
+      // fetchComponentData() will trigger actions listed in static "needs" props in each container component
+      // and wait for all of them to complete before continuing rendering the page,
+      // hence ensuring all data needed was fetched before proceeding
+      //
+      // renderProps: contains all necessary data, e.g: routes, router, history, components...
+      fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
+        .then(() => {
+          const initView = renderToString((
+            <Provider store={store}>
+              <RouterContext {...renderProps} />
+            </Provider>
+          ));
+          // console.log('\ninitView:\n', initView);
+          let state = JSON.stringify(store.getState());
+          // console.log( '\nstate: ', state )
+          let page = renderFullPage(initView, state);
+          // console.log( '\npage:\n', page );
+          return page;
+        })
+        .then(page => res.status(200).send(page))
+        .catch(err => res.end(err.message));
+    })
 });
 
 // start the server
