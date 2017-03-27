@@ -8,8 +8,11 @@ import {
 } from './helper/state';
 import reducers from '../reducer/index';
 
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+if (typeof window !== 'undefined') {
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+} else {
+  const composeEnhancers = compose;
+}
 
 export default class Store {
   constructor() {
