@@ -11,7 +11,7 @@
     "run:universal:dev": "better-npm-run run:universal:dev",
     "postinstall": "better-npm-run postinstall",
     "start": "npm run run:universal",
-    "dev": "node_modules\\.bin\\concurrent -k \"npm run run:universal:dev\" \"gulp build:dev\" "
+    "dev": "node_modules\\.bin\\concurrent -k \"npm run run:universal:dev\" \"npm run build:dev\" "
   },
   "betterScripts": {
     "run:universal": {
