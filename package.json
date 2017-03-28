@@ -25,7 +25,8 @@
       "command": "node_modules\\.bin\\nodemon src/server.js --exec node_modules\\.bin\\babel-node",
       "env": {
         "BABEL_ENV": "node",
-        "NODE_ENV": "development"
+        "NODE_ENV": "development",
+        "DEBUG": "*,-not_this"
       }
     },
     "postinstall": {
@@ -49,7 +50,7 @@
   },
   "repo": "git@github.com:bdeglane/universal-react-app.git",
   "author": "bdeglane@users.noreply.github.com",
-  "license": "MIT",
+  "license": "GNU GPLv3",
   "dependencies": {
     "babel-cli": "^6.22.2",
     "babel-core": "^6.22.1",
@@ -65,10 +66,12 @@
     "ejs": "^2.5.5",
     "express": "^4.14.0",
     "extract-text-webpack-plugin": "^2.1.0",
+    "file-stream-rotator": "^0.1.0",
     "gulp": "^3.9.1",
     "gulp-util": "^3.0.8",
     "gulp-webserver": "^0.9.1",
     "loader": "^2.1.1",
+    "morgan": "^1.8.1",
     "postcss-cssnext": "^2.10.0",
     "postcss-import": "^9.1.0",
     "postcss-loader": "^1.3.3",
