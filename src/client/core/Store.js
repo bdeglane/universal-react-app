@@ -6,6 +6,9 @@ import {
   initialState,
   saveState
 } from '../middleware/state';
+import {
+  vanillaPromise
+} from '../middleware/promiseMiddleware';
 import reducers from '../reducer/index';
 
 export default class Store {
@@ -17,6 +20,7 @@ export default class Store {
       this.getCompose(
         applyMiddleware(
           thunk,
+          vanillaPromise,
           logger,
           crashReporter
         )
