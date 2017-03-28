@@ -1,11 +1,11 @@
 import {createStore, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk';
-import {logger} from './helper/logger';
-import {crashReporter} from './helper/crashReporter';
+import {logger} from '../middleware/logger';
+import {crashReporter} from '../middleware/crashReporter';
 import {
   initialState,
   saveState
-} from './helper/state';
+} from '../middleware/state';
 import reducers from '../reducer/index';
 
 export default class Store {
