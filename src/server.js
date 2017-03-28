@@ -1,6 +1,9 @@
 import path from 'path';
 import {Server} from 'http';
 import Express from 'express';
+import fs from 'fs';
+import morgan from 'morgan';
+import FileStreamRotator from 'file-stream-rotator';
 
 import React from 'react';
 import {renderToString} from 'react-dom/server';
@@ -21,12 +24,22 @@ import {promiseMiddleware} from "./client/middleware/promiseMiddleware";
 const app = new Express();
 const server = new Server(app);
 
-// app.set('view engine', 'ejs');
-// app.set('views', path.join(__dirname, 'view'));
+//
 const finalCreateStore = applyMiddleware(promiseMiddleware)(createStore);
 
 // define the folder that will be used for static assets
 app.use(Express.static(path.join(__dirname, 'static')));
+
+// log
+let logDirectory = path.resolve(path.join('log'));
+fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
+let accessLogStream = FileStreamRotator.getStream({
+  date_format: 'YYYY-MM-DD',
+  filename: logDirectory + '/api-access-%DATE%.log',
+  frequency: 'daily',
+  verbose: false
+});
+app.use(morgan('[:date[clf]] [:req[x-forwarded-for]] [:req[x-forwarded-server]] :remote-user ":method :url"  :status :response-time ms :res[content-length] ":user-agent"', {stream: accessLogStream}));
 
 // universal routing and rendering
 app.get('*', (req, res, next) => {
