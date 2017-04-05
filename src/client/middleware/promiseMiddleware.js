@@ -1,3 +1,46 @@
+// https://github.com/reactjs/redux/issues/99#issuecomment-112212639
+export const promiseMiddleware = () => {
+  return (next) => (action) => {
+    const {promise, types, ...rest} = action;
+    if (!promise) {
+      return next(action);
+    }
+
+    // const [REQUEST, SUCCESS, FAILURE] = types;
+    //next({...rest});
+    return action.promise.then(
+      (result) => next({...rest}),
+      (error) => next({...rest})
+    );
+  };
+};
+
+// Usage
+// function doSomethingAsync(userId) {
+//   return {
+//     types: [SOMETHING_REQUEST, SOMETHING_SUCCESS, SOMETHING_FAILURE],
+//     promise: requestSomething(userId),
+//     userId
+//   };
+// }
+
+/**
+ * Lets you dispatch promises in addition to actions.
+ * If the promise is resolved, its result will be dispatched as an action.
+ * The promise is returned from `dispatch` so the caller may handle rejection.
+ */
+export const vanillaPromise = store => next => action => {
+  // if action have a promise key
+  if (!action.promise) {
+    return next(action)
+  }
+  // wait for the promise to resolve
+  // before calling next action
+  return action
+    .promise()
+    .then(store.dispatch);
+};
+
 /**
  * Lets you dispatch special actions with a { promise } field.
  *
