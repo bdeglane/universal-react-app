@@ -1,7 +1,7 @@
-import {createStore, applyMiddleware, compose} from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import {logger} from '../middleware/logger';
-import {crashReporter} from '../middleware/crashReporter';
+import { logger } from '../middleware/logger';
+import { crashReporter } from '../middleware/crashReporter';
 import {
   initialState,
   saveState
@@ -12,7 +12,7 @@ import {
 import reducers from '../reducer/index';
 
 export default class Store {
-  constructor() {
+  constructor () {
     // Add the reducer to your store on the `routing` key
     this.store = createStore(
       reducers,
@@ -32,11 +32,11 @@ export default class Store {
     });
   }
 
-  getStore() {
+  getStore () {
     return this.store;
   }
 
-  getCompose(middlewares) {
+  getCompose (middlewares) {
     let composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     return composeEnhancers(middlewares);
   }

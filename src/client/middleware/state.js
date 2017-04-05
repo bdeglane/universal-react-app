@@ -22,7 +22,7 @@ export const saveState = (state) => {
 export const initialState = () => {
   let state = loadState();
   if (state === 'undefined') {
-    return {}
+    return {};
   } else {
     return state;
   }

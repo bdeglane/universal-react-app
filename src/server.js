@@ -1,31 +1,46 @@
 import path from 'path';
-import {Server} from 'http';
+import { Server } from 'http';
 import Express from 'express';
 import fs from 'fs';
 import morgan from 'morgan';
 import FileStreamRotator from 'file-stream-rotator';
 
 import React from 'react';
-import {renderToString} from 'react-dom/server';
+import { renderToString } from 'react-dom/server';
 
-import {applyMiddleware, createStore} from 'redux';
-import {match, RouterContext, Router} from 'react-router';
-import {Provider} from 'react-redux';
+import {
+  applyMiddleware,
+  createStore
+} from 'redux';
+import {
+  match,
+  RouterContext,
+  Router
+} from 'react-router';
+import { Provider } from 'react-redux';
 import routes from './client/route/route';
-import reducers from './client/reducer/index'
+import reducers from './client/reducer/index';
 
-import {renderFullPage} from './client/common/renderHtmlDocument';
+import { renderFullPage } from './client/common/renderHtmlDocument';
 
 import NotFoundPage from './client/page/notFound/NotFoundPage.jsx';
-import {fetchComponentData} from "./client/common/fetchComponentData";
-import {promiseMiddleware} from "./client/middleware/promiseMiddleware";
+// import { fetchComponentData } from './client/common/fetchComponentData';
+import {
+  promiseMiddleware,
+//   vanillaPromise,
+//   readyStatePromise
+} from './client/middleware/promiseMiddleware';
 
 // initialize the server and configure support for ejs templates
 const app = new Express();
 const server = new Server(app);
 
-//
-const finalCreateStore = applyMiddleware(promiseMiddleware)(createStore);
+// wait for all promise to resolve before updating state
+const finalCreateStore = applyMiddleware(
+  // vanillaPromise,
+  // readyStatePromise,
+  promiseMiddleware
+)(createStore);
 
 // define the folder that will be used for static assets
 app.use(Express.static(path.join(__dirname, 'static')));
@@ -46,9 +61,7 @@ app.get('*', (req, res, next) => {
   match(
     {routes, location: req.url},
     (err, redirectLocation, renderProps) => {
-
       const store = finalCreateStore(reducers);
-
       // in case of error display the error message
       if (err) {
         return res.status(500).send(err.message);
@@ -65,7 +78,7 @@ app.get('*', (req, res, next) => {
         return res.status(404).send(renderFullPage(page, {}));
       }
 
-      //let store = new Store();
+      // let store = new Store();
       // generate the React markup for the current route
 
       // this is where universal rendering happens,
@@ -74,23 +87,26 @@ app.get('*', (req, res, next) => {
       // hence ensuring all data needed was fetched before proceeding
       //
       // renderProps: contains all necessary data, e.g: routes, router, history, components...
-      fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
-        .then(() => {
-          const initView = renderToString((
-            <Provider store={store}>
-              <RouterContext {...renderProps} />
-            </Provider>
-          ));
-          // console.log('\ninitView:\n', initView);
-          let state = JSON.stringify(store.getState());
-          // console.log( '\nstate: ', state )
-          let page = renderFullPage(initView, state);
-          // console.log( '\npage:\n', page );
-          return page;
-        })
-        .then(page => res.status(200).send(page))
-        .catch(err => res.end(err.message));
-    })
+      // fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
+      // .then(() => {
+      const initView = renderToString((
+        <Provider store={store}>
+          <RouterContext {...renderProps} />
+        </Provider>
+      ));
+      // console.log('\ninitView:\n', initView);
+      let state = JSON.stringify(store.getState());
+      // console.log( '\nstate: ', state )
+      let page = renderFullPage(initView, state);
+      // console.log( '\npage:\n', page );
+      // return page;
+
+      res.status(200).send(page);
+
+      //     })
+      //     .then(page => res.status(200).send(page))
+      //     .catch(err => res.end(err.message));
+    });
 });
 
 // start the server

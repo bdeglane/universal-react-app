@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Header from '../header/index';
 import SidebarNav from  '../sidebarNav/index';
 

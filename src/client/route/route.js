@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, IndexRoute} from 'react-router';
+import { Route, IndexRoute } from 'react-router';
 import NotFoundPage from '../page/notFound/NotFoundPage.jsx';
 import Home from '../page/home/Home.jsx';
 import Layout from '../component/layout/Layout.jsx';

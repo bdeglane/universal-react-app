@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {Provider} from 'react-redux'
-import {browserHistory} from 'react-router'
-import {syncHistoryWithStore} from 'react-router-redux'
+import React, { Component } from 'react';
+import { Provider } from 'react-redux'
+import { browserHistory } from 'react-router'
+import { syncHistoryWithStore } from 'react-router-redux'
 
 import Store from './core/Store';
 import Routes from './route/Routes.jsx';

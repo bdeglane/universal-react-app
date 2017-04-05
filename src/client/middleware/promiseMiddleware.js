@@ -7,7 +7,7 @@ export const promiseMiddleware = () => {
     }
 
     // const [REQUEST, SUCCESS, FAILURE] = types;
-    //next({...rest});
+    // next({...rest});
     return action.promise.then(
       (result) => next({...rest}),
       (error) => next({...rest})
@@ -32,7 +32,7 @@ export const promiseMiddleware = () => {
 export const vanillaPromise = store => next => action => {
   // if action have a promise key
   if (!action.promise) {
-    return next(action)
+    return next(action);
   }
   // wait for the promise to resolve
   // before calling next action
@@ -54,16 +54,15 @@ export const vanillaPromise = store => next => action => {
 export const readyStatePromise = (store) => {
   return (next) => {
     return (action) => {
-
       // check if action have a promise field
       // { type:'ACTION', text:'an action', promise:() => { return new Promise(); }, ... }
-      const {promise} = action;
+      const { promise } = action;
       // if action is not a promise, next...
       if (!promise) {
-        return next(action)
+        return next(action);
       }
       //
-      function makeAction(ready, data) {
+      function makeAction (ready, data) {
         // copy action into new object
         let newAction = Object.assign({}, action, {ready}, data);
         // delete promise key for next tick

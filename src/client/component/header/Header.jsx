@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import FontAwesome from 'react-fontawesome';
 
 import './header.css';
@@ -6,6 +6,10 @@ import './header.css';
 export default class Header extends Component {
   constructor() {
     super();
+  }
+
+  componentDidMount() {
+    this.props.asyncTest();
   }
 
   toggleMenu() {

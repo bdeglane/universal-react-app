@@ -1,7 +1,7 @@
-import {combineReducers} from 'redux';
-import {routerReducer} from 'react-router-redux';
+import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 
-import {menu} from './menu';
+import { menu } from './menu';
 
 /**
  * Combine all the reducers in a constant and export it.

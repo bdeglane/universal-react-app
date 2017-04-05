@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import PageTemplate from '../../component/template/page/PageTemplate.jsx';
 

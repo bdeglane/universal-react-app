@@ -1,15 +1,19 @@
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import Header from './Header.jsx';
-import {toggleMenu} from '../../action/menu';
+import {
+  toggleMenu,
+  examplePromiseAction
+} from '../../action/menu';
 
-const mapStateToProps = (state) => {
-  return {}
-};
+// const mapStateToProps = (state) => {
+//   return {};
+// };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    toggleMenu: () => dispatch(toggleMenu())
+    toggleMenu: () => dispatch(toggleMenu()),
+    asyncTest: () => dispatch(examplePromiseAction())
   };
 };
 
-export default connect(null, mapDispatchToProps)(Header)
+export default connect(null, mapDispatchToProps)(Header);

@@ -11,7 +11,7 @@ const isDev = ENV === 'development';
 const cssLocalName = isDev ? '[path][name]__[local]' : '[hash:base64:5]';
 
 module.exports = {
-  entry: path.resolve(path.join(__dirname, 'src', 'client.js')),
+  entry: path.resolve(path.join(__dirname, 'src', 'client.jsx')),
   output: {
     path: path.resolve(path.join(__dirname, 'src', 'static', 'js')),
     publicPath: path.resolve(path.join(__dirname, 'src', 'static')),

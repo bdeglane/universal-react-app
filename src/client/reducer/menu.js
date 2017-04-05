@@ -1,9 +1,9 @@
-import {TOGGLE_MENU} from '../constant/menu';
+import { TOGGLE_MENU } from '../constant/menu';
 
 export const getDefaultState = () => {
   return {
     open: false
-  }
+  };
 };
 
 export const menu = (state = getDefaultState(), action) => {
