@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "description": "Sample React universal app ",
   "main": "index.js",
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    }
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:dev": "better-npm-run build:dev",
@@ -11,6 +17,7 @@
     "run:universal:dev": "better-npm-run run:universal:dev",
     "postinstall": "better-npm-run postinstall",
     "start": "npm run run:universal",
+    "lint": "node_modules\\.bin\\eslint src\\",
     "dev": "node_modules\\.bin\\concurrent -k \"npm run run:universal:dev\" \"npm run build:dev\" "
   },
   "betterScripts": {
@@ -89,6 +96,15 @@
   "devDependencies": {
     "concurrently": "^3.1.0",
     "debug": "^2.6.3",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-config-standard": "^10.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^6.10.3",
+    "eslint-plugin-standard": "^2.2.0",
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0"
   }
