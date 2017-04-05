@@ -14,8 +14,7 @@ import {
 } from 'redux';
 import {
   match,
-  RouterContext,
-  Router
+  RouterContext
 } from 'react-router';
 import { Provider } from 'react-redux';
 import routes from './client/route/route';
@@ -23,7 +22,7 @@ import reducers from './client/reducer/index';
 
 import { renderFullPage } from './client/common/renderHtmlDocument';
 
-import NotFoundPage from './client/page/notFound/NotFoundPage.jsx';
+import NotFoundPage from './client/page/notFound/NotFoundPage';
 // import { fetchComponentData } from './client/common/fetchComponentData';
 import {
   promiseMiddleware,
@@ -46,11 +45,11 @@ const finalCreateStore = applyMiddleware(
 app.use(Express.static(path.join(__dirname, 'static')));
 
 // log
-let logDirectory = path.resolve(path.join('log'));
+const logDirectory = path.resolve(path.join('log'));
 fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
-let accessLogStream = FileStreamRotator.getStream({
+const accessLogStream = FileStreamRotator.getStream({
   date_format: 'YYYY-MM-DD',
-  filename: logDirectory + '/api-access-%DATE%.log',
+  filename: `${logDirectory}/api-access-%DATE%.log`,
   frequency: 'daily',
   verbose: false
 });
@@ -59,7 +58,7 @@ app.use(morgan('[:date[clf]] [:req[x-forwarded-for]] [:req[x-forwarded-server]] 
 // universal routing and rendering
 app.get('*', (req, res, next) => {
   match(
-    {routes, location: req.url},
+    { routes, location: req.url },
     (err, redirectLocation, renderProps) => {
       const store = finalCreateStore(reducers);
       // in case of error display the error message
@@ -73,8 +72,9 @@ app.get('*', (req, res, next) => {
       }
 
       if (renderProps == null) {
-        // return next('err msg: route not found'); // yield control to next middleware to handle the request
-        let page = renderToString(<NotFoundPage/>);
+        // return next('err msg: route not found');
+        // yield control to next middleware to handle the request
+        const page = renderToString(<NotFoundPage/>);
         return res.status(404).send(renderFullPage(page, {}));
       }
 

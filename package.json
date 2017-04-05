@@ -22,14 +22,14 @@
   },
   "betterScripts": {
     "run:universal": {
-      "command": "node_modules\\.bin\\babel-node src/server.js",
+      "command": "node_modules\\.bin\\babel-node src/server.jsx",
       "env": {
         "BABEL_ENV": "node",
         "NODE_ENV": "production"
       }
     },
     "run:universal:dev": {
-      "command": "node_modules\\.bin\\nodemon src/server.js --exec node_modules\\.bin\\babel-node",
+      "command": "node_modules\\.bin\\nodemon src/server.jsx --exec node_modules\\.bin\\babel-node",
       "env": {
         "BABEL_ENV": "node",
         "NODE_ENV": "development",
