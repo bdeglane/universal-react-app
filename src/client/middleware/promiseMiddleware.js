@@ -1,18 +1,16 @@
 // https://github.com/reactjs/redux/issues/99#issuecomment-112212639
-export const promiseMiddleware = () => {
-  return (next) => (action) => {
-    const {promise, types, ...rest} = action;
-    if (!promise) {
-      return next(action);
-    }
+export const promiseMiddleware = () => next => action => {
+  const { promise, types, ...rest } = action;
+  if (!promise) {
+    return next(action);
+  }
 
-    // const [REQUEST, SUCCESS, FAILURE] = types;
-    // next({...rest});
-    return action.promise.then(
-      (result) => next({...rest}),
-      (error) => next({...rest})
-    );
-  };
+  // const [REQUEST, SUCCESS, FAILURE] = types;
+  // next({...rest});
+  return action.promise.then(
+    result => next({ ...rest }),
+    error => next({ ...rest })
+  );
 };
 
 // Usage
@@ -51,9 +49,9 @@ export const vanillaPromise = store => next => action => {
  *
  * see http://redux.js.org/docs/advanced/Middleware.html
  */
-export const readyStatePromise = (store) => {
-  return (next) => {
-    return (action) => {
+export const readyStatePromise = store => {
+  return next => {
+    return action => {
       // check if action have a promise field
       // { type:'ACTION', text:'an action', promise:() => { return new Promise(); }, ... }
       const { promise } = action;
@@ -62,9 +60,9 @@ export const readyStatePromise = (store) => {
         return next(action);
       }
       //
-      function makeAction (ready, data) {
+      function makeAction(ready, data) {
         // copy action into new object
-        let newAction = Object.assign({}, action, {ready}, data);
+        let newAction = Object.assign({ }, action, { ready }, data);
         // delete promise key for next tick
         delete newAction.promise;
         // return action
@@ -77,8 +75,8 @@ export const readyStatePromise = (store) => {
       // an action with pending promise
       return action.promise().then(
         // then resolved, next
-        result => next(makeAction(true, {result})),
-        error => next(makeAction(true, {error}))
+        result => next(makeAction(true, { result })),
+        error => next(makeAction(true, { error }))
       );
     };
   };

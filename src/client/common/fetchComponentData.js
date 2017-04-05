@@ -1,10 +1,10 @@
-const debug = require('debug')('fetch');
+// const debug = require('debug')('fetch');
 
 // for use on server to guarantee data was fetched before rendering pages for user
 export const fetchComponentData = (dispatch, components, params) => {
-  debug(dispatch);
-  debug(components);
-  debug(params);
+  // debug(dispatch);
+  // debug(components);
+  // debug(params);
   return new Promise((resolve, reject) => {
     resolve();
   });

@@ -10,7 +10,7 @@ const loadState = () => {
   }
 };
 
-export const saveState = (state) => {
+export const saveState = state => {
   try {
     const serializedState = JSON.stringify(state);
     localStorage.setItem('state', serializedState);
@@ -20,9 +20,9 @@ export const saveState = (state) => {
 };
 
 export const initialState = () => {
-  let state = loadState();
+  const state = loadState();
   if (state === 'undefined') {
-    return {};
+    return { };
   } else {
     return state;
   }

@@ -4,7 +4,7 @@ export const logger = (store) => {
       console.group(action.type);
       console.info('dispatching', action);
       // store dispatch
-      let result = next(action);
+      const result = next(action);
       console.log('next state', store.getState());
       console.groupEnd(action.type);
       return result;

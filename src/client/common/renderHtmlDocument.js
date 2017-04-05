@@ -1,5 +1,5 @@
-export const renderFullPage = (html, initialState) => {
-  return `
+export const renderFullPage = (html, initialState) => (
+  `
    <!doctype html>
    <html lang="utf-8">
    <head>
@@ -30,5 +30,5 @@ export const renderFullPage = (html, initialState) => {
    <script src="js/main.js"></script>
    </body>
   </html>
-  `;
-  };
+  `
+);

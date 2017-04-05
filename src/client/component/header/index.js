@@ -9,11 +9,9 @@ import {
 //   return {};
 // };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    toggleMenu: () => dispatch(toggleMenu()),
-    asyncTest: () => dispatch(examplePromiseAction())
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  toggleMenu: () => dispatch(toggleMenu()),
+  asyncTest: () => dispatch(examplePromiseAction())
+});
 
 export default connect(null, mapDispatchToProps)(Header);
