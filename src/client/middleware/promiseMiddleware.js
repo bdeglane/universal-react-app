@@ -1,16 +1,24 @@
 // https://github.com/reactjs/redux/issues/99#issuecomment-112212639
-export const promiseMiddleware = () => next => action => {
-  const { promise, types, ...rest } = action;
-  if (!promise) {
-    return next(action);
-  }
+export const promiseMiddleware = () => {
+  return next => {
+    return action => {
+      const { promise, types, ...rest } = action;
+      if (!promise) {
+        return next(action);
+      }
 
-  // const [REQUEST, SUCCESS, FAILURE] = types;
-  // next({...rest});
-  return action.promise.then(
-    result => next({ ...rest }),
-    error => next({ ...rest })
-  );
+      // const [REQUEST, SUCCESS, FAILURE] = types;
+      // next({...rest});
+      return action.promise.then(
+        result => {
+          return next({ ...rest });
+        },
+        error => {
+          return next({ ...rest });
+        }
+      );
+    };
+  };
 };
 
 // Usage
@@ -27,16 +35,20 @@ export const promiseMiddleware = () => next => action => {
  * If the promise is resolved, its result will be dispatched as an action.
  * The promise is returned from `dispatch` so the caller may handle rejection.
  */
-export const vanillaPromise = store => next => action => {
-  // if action have a promise key
-  if (!action.promise) {
-    return next(action);
-  }
-  // wait for the promise to resolve
-  // before calling next action
-  return action
-    .promise()
-    .then(store.dispatch);
+export const vanillaPromise = store => {
+  return next => {
+    return action => {
+      // if action have a promise key
+      if (!action.promise) {
+        return next(action);
+      }
+      // wait for the promise to resolve
+      // before calling next action
+      return action
+        .promise()
+        .then(store.dispatch);
+    };
+  };
 };
 
 /**
@@ -62,7 +74,7 @@ export const readyStatePromise = store => {
       //
       function makeAction(ready, data) {
         // copy action into new object
-        let newAction = Object.assign({ }, action, { ready }, data);
+        let newAction = Object.assign({}, action, { ready }, data);
         // delete promise key for next tick
         delete newAction.promise;
         // return action
@@ -75,8 +87,12 @@ export const readyStatePromise = store => {
       // an action with pending promise
       return action.promise().then(
         // then resolved, next
-        result => next(makeAction(true, { result })),
-        error => next(makeAction(true, { error }))
+        result => {
+          return next(makeAction(true, { result }));
+        },
+        error => {
+          return next(makeAction(true, { error }));
+        }
       );
     };
   };

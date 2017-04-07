@@ -1,6 +1,6 @@
-export const logger = (store) => {
-  return (next) => {
-    return (action) => {
+export const logger = store => {
+  return next => {
+    return action => {
       console.group(action.type);
       console.info('dispatching', action);
       // store dispatch
